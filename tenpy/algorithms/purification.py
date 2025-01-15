@@ -250,6 +250,7 @@ class PurificationTEBD(tebd.TEBDEngine):
         U, S, V, trunc_err, renormalize = svd_theta(theta,
                                                     self.trunc_params,
                                                     inner_labels=['vR', 'vL'])
+        self.psi.norm *= renormalize**2 # changed
         # Split legs and update matrices
         B_R = V.split_legs(1).ireplace_labels(['p1', 'q1'], ['p', 'q'])
         A_L = U.split_legs(0).ireplace_labels(['p0', 'q0'], ['p', 'q'])
